@@ -5,6 +5,7 @@ import { load } from './search.server';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FetchResponse } from 'src/interfaces/fetchresponse';
 
 @Component({
   selector: 'app-home',

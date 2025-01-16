@@ -1,4 +1,5 @@
 import { defineEventHandler, readBody } from 'h3';
+import { FetchResponse } from 'src/interfaces/fetchresponse';
 
 export default defineEventHandler(async (request) => {
   const lambdaUrl = import.meta.env['VITE_LAMBDA_FUNCTION_URL'];
