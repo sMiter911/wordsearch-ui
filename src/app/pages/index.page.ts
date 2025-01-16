@@ -174,7 +174,7 @@ export default class HomeComponent {
 
           console.log('Result', data);
           this.word = data.WordSearchResponses[0].word;
-          this.meanings = data.WordSearchResponses.flatMap((item) =>
+          this.meanings = data.WordSearchResponses.flatMap((item: any) =>
             item.meanings.map((meaning: any) => ({
               partOfSpeech: meaning.partOfSpeech,
               definitions: meaning.definitions.map((definition: any) => ({
@@ -183,7 +183,7 @@ export default class HomeComponent {
               })),
             }))
           );
-          this.phonetics = data.WordSearchResponses.flatMap((item) =>
+          this.phonetics = data.WordSearchResponses.flatMap((item: any) =>
             item.phonetics.map((phonetic: any) => ({
               text: phonetic.text,
               audio: phonetic.audio || null,
