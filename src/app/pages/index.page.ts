@@ -13,12 +13,12 @@ import { FetchResponse } from 'src/interfaces/fetchresponse';
   imports: [FormsModule, CommonModule],
   template: `
     <div
-      class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4"
+      class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen flex flex-col items-center justify-center p-4"
     >
       <!-- Header -->
       <h1
         *ngIf="!loading && !error && meanings.length === 0"
-        class="text-4xl text-center font-bold text-gray-600 mb-6 leading-tight"
+        class="text-4xl text-center font-bold text-gray-800 mb-6 leading-tight animate-fade-in"
       >
         Unlock Word Power: Definitions, Phonetics & Examples with the Free
         Dictionary API
@@ -26,10 +26,12 @@ import { FetchResponse } from 'src/interfaces/fetchresponse';
 
       <!-- Main Container -->
       <div
-        class="flex flex-col lg:flex-row items-start justify-center gap-8 w-full max-w-6xl"
+        class="flex flex-col lg:flex-row items-start justify-center gap-8 w-full max-w-6xl animate-fade-in-up"
       >
         <!-- Form Section -->
-        <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
+        <div
+          class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-lg transform transition-all hover:scale-105"
+        >
           <h1
             class="text-3xl font-extrabold text-gray-800 text-center mb-6 tracking-wide"
           >
@@ -41,19 +43,21 @@ import { FetchResponse } from 'src/interfaces/fetchresponse';
               name="search"
               placeholder="Enter a word..."
               [(ngModel)]="searchWord"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400 transition duration-200 text-gray-700"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 text-gray-700 placeholder-gray-400"
             />
-            <div class="flex flex-col lg:flex-row items-center justify-center">
+            <div
+              class="flex flex-col lg:flex-row items-center justify-center gap-4 mt-6"
+            >
               <button
                 type="button"
                 (click)="clearSearch()"
-                class="mr-5 mt-4 w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg transform transition duration-300"
+                class="w-full lg:w-auto bg-gradient-to-r from-gray-500 to-gray-600 text-white py-3 px-6 rounded-lg hover:from-gray-600 hover:to-gray-700 shadow-md hover:shadow-lg transform transition duration-300 hover:-translate-y-1"
               >
                 Clear
               </button>
               <button
                 type="submit"
-                class="mt-4 w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg transform transition duration-300"
+                class="w-full lg:w-auto bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg hover:from-blue-600 hover:to-blue-700 shadow-md hover:shadow-lg transform transition duration-300 hover:-translate-y-1"
               >
                 Search
               </button>
@@ -64,11 +68,13 @@ import { FetchResponse } from 'src/interfaces/fetchresponse';
         <!-- Results Section -->
         <div
           *ngIf="loading || meanings.length > 0 || error"
-          class="bg-white shadow-lg rounded-xl p-8 w-full max-w-2xl"
+          class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl transform transition-all hover:scale-100"
         >
           <!-- Loader -->
           <div *ngIf="loading" class="flex justify-center items-center py-8">
-            <div class="loader"></div>
+            <div
+              class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+            ></div>
           </div>
 
           <!-- Error Message -->
@@ -91,7 +97,7 @@ import { FetchResponse } from 'src/interfaces/fetchresponse';
               <button
                 *ngIf="phonetic.audio"
                 (click)="playAudio(phonetic.audio)"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2 hover:bg-blue-700 transition duration-200"
               >
                 Play Audio
               </button>
@@ -125,6 +131,30 @@ import { FetchResponse } from 'src/interfaces/fetchresponse';
       height: 40px;
       animation: spin 1s linear infinite;
     }
+
+    @keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-in-out;
+}
 
     @keyframes spin {
       0% {
